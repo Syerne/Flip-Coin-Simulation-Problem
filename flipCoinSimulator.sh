@@ -1,28 +1,33 @@
 echo "welcome to the flip coin simultion"
 
-
+#flip the coin and count the wins and decide who wins
 Head=1
-Headcount=0
-Tailcount=0
-for((i=1 ; i<=25 ; i++))
+Tail=0
+Hcount=0
+Tcount=0
+
+while (( Head != Tail ))
 do
-  if((randomcheck=$((RANDOM%2))))
-  then
-	randomcheck=$((randomcheck==1))
-	Headcount=$(($Headcount + 1))
-        echo "Head"
-  else
-        Tailcount=$(($Tailcount + 1))
-	echo "Tail"
-  fi
+if(( $((RANDOM % 2)) == 1 ))
+then
+        Hcount=$(($Hcount + 1))
+        echo "HEADS: $Hcount"
+
+        if(($Hcount == 21 ))
+        then
+                echo "***HEAD WINS***"
+                break
+        fi
+else
+        Tcount=$(($Tcount + 1))
+        echo "TAILS: $Tcount"
+
+        if [ $Tcount == 21 ]
+        then
+                echo "***TAIL WINS***"
+                break
+        fi
+fi
 done
-echo "Headcount:" $Headcount
-echo "Tailcount:" $Tailcount
-
-  if(($Headcount>$Tailcount))
-  then
-	echo "Head_won:" $Headcount
-  else
-	echo "Tail_won:" $Tailcount
-  fi
-
+echo "Hcount:" $Hcount
+echo "Tcount:" $Tcount
